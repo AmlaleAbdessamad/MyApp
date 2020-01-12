@@ -19,7 +19,7 @@ class ContactfournisseurController extends Controller
         $this->middleware('auth');
     }
 
-     public function addcontact(Request $request){
+    public function addcontact(Request $request){
 
         $rules=array(
             'civilite' => 'required|string',

@@ -28,7 +28,7 @@ class AdresseclientController extends Controller
         );
         $error=Validator::make($request->all(),$rules);
         if($error->fails()){
-            return response()->json(['errors'=>$error->errors()->all()]);
+            return response()->json(['errors'=>$error->errors()]);
         }
         
         $data=Adresseclient::create($request->all());
@@ -46,7 +46,7 @@ class AdresseclientController extends Controller
         );
         $error=Validator::make($request->all(),$rules);
         if($error->fails()){
-            return response()->json(['errors'=>$error->errors()->all()]);
+            return response()->json(['errors'=>$error->errors()]);
         }
         $adresse=Adresseclient::find($request->adresse_id);
         $adresse->update($request->all());

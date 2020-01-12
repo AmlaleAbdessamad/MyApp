@@ -358,9 +358,8 @@ $pays=AdresseclientController::getPays();
         });
 
         function clearMessages(){
-            $("#form_contact div.messages").empty();
+            $("div.messages").empty();
             $('input').removeClass('is-invalid');
-            
          }
         // ajouter un contact
         $("#add_contact").click(function(){
@@ -368,6 +367,7 @@ $pays=AdresseclientController::getPays();
             $('#modal_contact .modal-title').text("Ajouter un Contact");
             $('#modal_contact #button_submit').text("Ajouter").addClass('add').removeClass('update');
             $('#modal_contact').modal('show');
+            $('#form_contact')[0].reset();
         });
     
     
@@ -388,10 +388,12 @@ $pays=AdresseclientController::getPays();
                     var message='';
                     if(response.errors){
                         message='<div class="alert alert-danger" role="alert">';
-                        for(var k in response.errors) {
+                        $.each(response.errors,function (k,v) {
+                            message+='<p>'+v[0]+'</p>';
                             $('input[name="'+k+'"').addClass('is-invalid');
-                        }
-                        message+='<p>Les champs sélectionnés en rouge sont obligatoires</div>';
+                            $('textarea[name="'+k+'"').addClass('is-invalid');
+                        });
+                        message+='</div>';
                     }
                     if(response.success){
                         
@@ -406,7 +408,7 @@ $pays=AdresseclientController::getPays();
                         '<td><a href="#" id_contact="'+response.id_contact+'" title="Modifier" class="mod_contact"><i class="fas fa-pen-fancy fa-lg mr-2"></i><a href="#" id_contact="'+response.id_contact+'" title="Supprimer" class="supp_contact"><i class="fas fa-trash-alt fa-lg"></i></a></td></tr>');
                         $('#form_contact')[0].reset();
                     }
-                    $("#form_contact div.loader").empty();
+                    $("div.loader").empty();
                     $("#form_contact div.messages").html(message);
                 }
             });
@@ -416,12 +418,14 @@ $pays=AdresseclientController::getPays();
        
         $('table.table').on("click",'a.mod_contact',function(){
             clearMessages();
+            var id=$(this).attr('id_contact');
             $('#modal_contact').modal('show');
             $('#modal_contact .modal-title').text("Modifier un Contact");
             $('#modal_contact #button_submit').text("Modifier").addClass('update').removeClass('add');
             tr=$(this).parent().parent();
-            $.post("{{ route('fournisseurs.contacts.get') }}",{id : $(this).attr('id_contact')}, function(response){
+            $.post("{{ route('fournisseurs.contacts.get') }}",{id : id}, function(response){
                 if(response){
+                    $('#form_contact input[name="contact_id"]').val(id);
                     $('#form_contact select[name="civilite"]').val(response.contact.civilite);
                     $('#form_contact input[name="nom"]').val(response.contact.nom);
                     $('#form_contact input[name="prenom"]').val(response.contact.prenom);
@@ -450,10 +454,12 @@ $pays=AdresseclientController::getPays();
                     var message='';
                     if(response.errors){
                         message='<div class="alert alert-danger" role="alert">';
-                        for(var k in response.errors) {
+                        $.each(response.errors,function (k,v) {
+                            message+='<p>'+v[0]+'</p>';
                             $('input[name="'+k+'"').addClass('is-invalid');
-                        }
-                        message+='<p>Les champs sélectionnés en rouge sont obligatoires</div>';
+                            $('textarea[name="'+k+'"').addClass('is-invalid');
+                        });
+                        message+='</div>';
                     }
                     if(response.success){
                         message='<div class="alert alert-success" role="alert">'+response.success+'</div>';
@@ -463,7 +469,7 @@ $pays=AdresseclientController::getPays();
                         tr.find('td.tel').text($('#form_contact input[name="tel"]').val());
                         tr.find('td.email').text($('#form_contact input[name="email"]').val());
                     }
-                    $("#form_contact div.loader").empty();
+                    $("div.loader").empty();
                     $("#form_contact div.messages").html(message);
                 }
             });
@@ -502,6 +508,7 @@ $pays=AdresseclientController::getPays();
             $('#modal_adresse .modal-title').text("Ajouter une adresse");
             $('#modal_adresse #button_submit').text("Ajouter").addClass('add').removeClass('update');
             $('#modal_adresse').modal('show');
+            $('#form_adresse')[0].reset();
         });
     
     
@@ -522,10 +529,12 @@ $pays=AdresseclientController::getPays();
                     var message='';
                     if(response.errors){
                         message='<div class="alert alert-danger" role="alert">';
-                        for(var k in response.errors) {
+                        $.each(response.errors,function (k,v) {
+                            message+='<p>'+v[0]+'</p>';
                             $('input[name="'+k+'"').addClass('is-invalid');
-                        }
-                        message+='<p>Les champs sélectionnés en rouge sont obligatoires</div>';
+                            $('textarea[name="'+k+'"').addClass('is-invalid');
+                        });
+                        message+='</div>';
                     }
                     if(response.success){
                         
@@ -540,7 +549,7 @@ $pays=AdresseclientController::getPays();
                         '<td><a href="#" id_adresse="'+response.id_adresse+'" title="Modifier" class="mod_adresse"><i class="fas fa-pen-fancy fa-lg mr-2"></i><a href="#" id_adresse="'+response.id_adresse+'" title="Supprimer" class="supp_adresse"><i class="fas fa-trash-alt fa-lg"></i></a></td></tr>');
                         $('#form_adresse')[0].reset();
                     }
-                    $("#form_contact div.loader").empty();
+                    $("div.loader").empty();
                     $("#form_adresse div.messages").html(message);
                 }
             });
@@ -550,12 +559,14 @@ $pays=AdresseclientController::getPays();
        
         $('table.adresses').on("click",'a.mod_adresse',function(){
             clearMessages();
+            var id=$(this).attr('id_adresse');
             $('#modal_adresse').modal('show');
             $('#modal_adresse .modal-title').text("Modifier une Adresse");
             $('#modal_adresse #button_submit').text("Modifier").addClass('update').removeClass('add');
             tr=$(this).parent().parent();
-            $.post("{{ route('fournisseurs.adresses.get') }}",{id : $(this).attr('id_adresse')}, function(response){
+            $.post("{{ route('fournisseurs.adresses.get') }}",{id : id}, function(response){
                 if(response){
+                    $('#form_adresse input[name="adresse_id"]').val(id);
                     $('#form_adresse input[name="nom"]').val(response.adresse.nom);
                     $('#form_adresse textarea[name="adresse"]').val(response.adresse.adresse);
                     $('#form_adresse input[name="ville"]').val(response.adresse.ville);
@@ -583,10 +594,12 @@ $pays=AdresseclientController::getPays();
                     var message='';
                     if(response.errors){
                         message='<div class="alert alert-danger" role="alert">';
-                        for(var k in response.errors) {
+                        $.each(response.errors,function (k,v) {
+                            message+='<p>'+v[0]+'</p>';
                             $('input[name="'+k+'"').addClass('is-invalid');
-                        }
-                        message+='<p>Les champs sélectionnés en rouge sont obligatoires</div>';
+                            $('textarea[name="'+k+'"').addClass('is-invalid');
+                        });
+                        message+='</div>';
                     }
                     if(response.success){
                         message='<div class="alert alert-success" role="alert">'+response.success+'</div>';
@@ -596,7 +609,7 @@ $pays=AdresseclientController::getPays();
                         tr.find('td.code_postal').text($('#form_adresse input[name="code_postal"]').val());
                         tr.find('td.pays').text($('#form_adresse select[name="pays"]').val());
                     }
-                    $("#form_contact div.loader").empty();
+                    $("div.loader").empty();
                     $("#form_adresse div.messages").html(message);
                 }
             });

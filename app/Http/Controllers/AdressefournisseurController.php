@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Adressefournisseur;
 use Illuminate\Http\Request;
+use Validator;
 
 class AdressefournisseurController extends Controller
 {
