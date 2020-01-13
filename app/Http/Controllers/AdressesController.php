@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Adresseclient;
+use App\Adresse;
+use Exception;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
-class AdresseclientController extends Controller
+class AdressesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -18,7 +19,7 @@ class AdresseclientController extends Controller
         $this->middleware('auth');
     }
     public function addadresse(Request $request){
-
+        
         $rules=array(
             'nom' => 'required|string',
             'adresse' => 'required|string',
@@ -30,8 +31,8 @@ class AdresseclientController extends Controller
         if($error->fails()){
             return response()->json(['errors'=>$error->errors()]);
         }
-        
-        $data=Adresseclient::create($request->all());
+
+        $data=Adresse::create($request->all());
         return response()->json(['success'=>'adresse ajouté avec succès','id_adresse'=>$data->id]);
     }
 
@@ -46,15 +47,15 @@ class AdresseclientController extends Controller
         );
         $error=Validator::make($request->all(),$rules);
         if($error->fails()){
-            return response()->json(['errors'=>$error->errors()]);
+            return response()->json(['errors'=>$error->errors()->all()]);
         }
-        $adresse=Adresseclient::find($request->adresse_id);
+        $adresse=Adresse::find($request->adresse_id);
         $adresse->update($request->all());
         return response()->json(['success'=>'adresse modifié avec succès','adresse'=>request()->all()]);
     }
 
     public function deleteadresse($id){
-        $adresse=Adresseclient::find($id);
+        $adresse=Adresse::find($id);
 
         if($adresse->delete()){
             return response()->json(['success'=>'Elément supprimé avec succes .']);
@@ -65,10 +66,10 @@ class AdresseclientController extends Controller
     }
 
     public function getadresse(Request $request){
-        $adresse=Adresseclient::find($request->id);
+        $adresse=Adresse::find($request->id);
         return response()->json(['adresse'=>$adresse]);
     }
-
+    
     public static function getPays()
     {
         //

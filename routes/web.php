@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 Route::get('/', function () {
@@ -39,15 +40,15 @@ Route::get('/clients/edite/{client}', 'ClientController@edite')->name('clients.e
 Route::get('/clients/delete/{client}', 'ClientController@delete')->name('clients.delete');
 Route::post('/clients/{client}', 'ClientController@update')->name('clients.update');
 
-Route::post('/clients/contacts/add', 'ContactclientController@addcontact')->name('clients.contacts.add');
-Route::post('/clients/contacts/update', 'ContactclientController@updatecontact')->name('clients.contacts.update');
-Route::get('/clients/contacts/delete/{id}', 'ContactclientController@deletecontact')->name('clients.contacts.delete');
-Route::post('/clients/contacts/get', 'ContactclientController@getcontact')->name('clients.contacts.get');
+Route::post('/clients/contacts/add', 'ContactsController@addcontact')->name('clients.contacts.add');
+Route::post('/clients/contacts/update', 'ContactsController@updatecontact')->name('clients.contacts.update');
+Route::get('/clients/contacts/delete/{id}', 'ContactsController@deletecontact')->name('clients.contacts.delete');
+Route::post('/clients/contacts/get', 'ContactsController@getcontact')->name('clients.contacts.get');
 
-Route::post('/clients/adresses/add', 'AdresseclientController@addadresse')->name('clients.adresses.add');
-Route::post('/clients/adresses/update', 'AdresseclientController@updateadresse')->name('clients.adresses.update');
-Route::get('/clients/adresses/delete/{id}', 'AdresseclientController@deleteadresse')->name('clients.adresses.delete');
-Route::post('/clients/adresses/get', 'AdresseclientController@getadresse')->name('clients.adresses.get');
+Route::post('/clients/adresses/add', 'AdressesController@addadresse')->name('clients.adresses.add');
+Route::post('/clients/adresses/update', 'AdressesController@updateadresse')->name('clients.adresses.update');
+Route::get('/clients/adresses/delete/{id}', 'AdressesController@deleteadresse')->name('clients.adresses.delete');
+Route::post('/clients/adresses/get', 'AdressesController@getadresse')->name('clients.adresses.get');
 
 
 //fournisseurs 
@@ -58,16 +59,12 @@ Route::get('/fournisseurs/edite/{fournisseur}', 'FournisseurController@edite')->
 Route::get('/fournisseurs/delete/{fournisseur}', 'FournisseurController@delete')->name('fournisseurs.delete');
 Route::post('/fournisseurs/{fournisseur}', 'FournisseurController@update')->name('fournisseurs.update');
 
-Route::post('/fournisseurs/contacts/add', 'ContactfournisseurController@addcontact')->name('fournisseurs.contacts.add');
-Route::post('/fournisseurs/contacts/update', 'ContactfournisseurController@updatecontact')->name('fournisseurs.contacts.update');
-Route::get('/fournisseurs/contacts/delete/{id}', 'ContactfournisseurController@deletecontact')->name('fournisseurs.contacts.delete');
-Route::post('/fournisseurs/contacts/get', 'ContactfournisseurController@getcontact')->name('fournisseurs.contacts.get');
+Route::post('/fournisseurs/contacts/add', 'ContactsController@addcontact')->name('fournisseurs.contacts.add');
+Route::post('/fournisseurs/contacts/update', 'ContactsController@updatecontact')->name('fournisseurs.contacts.update');
+Route::get('/fournisseurs/contacts/delete/{id}', 'ContactsController@deletecontact')->name('fournisseurs.contacts.delete');
+Route::post('/fournisseurs/contacts/get', 'ContactsController@getcontact')->name('fournisseurs.contacts.get');
 
-Route::post('/fournisseurs/adresses/add', 'AdressefournisseurController@addadresse')->name('fournisseurs.adresses.add');
-Route::post('/fournisseurs/adresses/update', 'AdressefournisseurController@updateadresse')->name('fournisseurs.adresses.update');
-Route::get('/fournisseurs/adresses/delete/{id}', 'AdressefournisseurController@deleteadresse')->name('fournisseurs.adresses.delete');
-Route::post('/fournisseurs/adresses/get', 'AdressefournisseurController@getadresse')->name('fournisseurs.adresses.get');
-
-
-Auth::routes();
-
+Route::post('/fournisseurs/adresses/add', 'AdressesController@addadresse')->name('fournisseurs.adresses.add');
+Route::post('/fournisseurs/adresses/update', 'AdressesController@updateadresse')->name('fournisseurs.adresses.update');
+Route::get('/fournisseurs/adresses/delete/{id}', 'AdressesController@deleteadresse')->name('fournisseurs.adresses.delete');
+Route::post('/fournisseurs/adresses/get', 'AdressesController@getadresse')->name('fournisseurs.adresses.get');

@@ -34,7 +34,10 @@
                 <td>{{ $client->email }}</td>
                 <td>{{ $client->siteweb }}</td>
                 <td><a href="{{ route('clients.edit',$client->id) }}"><span data-feather="edit" style="width:20;height:20"></span></a>
-                    <a href="{{ route('clients.delete',$client->id) }}"><span data-feather="trash-2" style="width:20;height:20" class="ml-2"></span></a></td>
+                    <a href="{{ route('clients.delete',$client->id) }}">
+                        <span data-feather="trash-2" style="width:20;height:20" class="ml-2"></span>
+                    </a>
+                </td>
             </tr>
         @endforeach
         </tbody>

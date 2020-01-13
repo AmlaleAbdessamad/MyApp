@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use Illuminate\Http\Request;
-use App\Contactclient;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
-class ContactclientController extends Controller
+class ContactsController extends Controller
 {
-    //
+
     /**
      * Create a new controller instance.
      *
@@ -35,7 +35,7 @@ class ContactclientController extends Controller
             return response()->json(['errors'=>$error->errors()]);
         }
         
-        $data=Contactclient::create($request->all());
+        $data=Contact::create($request->all());
         return response()->json(['success'=>'contact ajouté avec succès','id_contact'=>$data->id]);
     }
 
@@ -54,13 +54,13 @@ class ContactclientController extends Controller
         if($error->fails()){
             return response()->json(['errors'=>$error->errors()]);
         }
-        $contact=Contactclient::find($request->contact_id);
+        $contact=Contact::find($request->contact_id);
         $contact->update($request->all());
         return response()->json(['success'=>'contact modifié avec succès','contact'=>request()->all()]);
     }
 
     public function deletecontact($id){
-        $contact=Contactclient::find($id);
+        $contact=Contact::find($id);
 
         if($contact->delete()){
             return response()->json(['success'=>'Elément supprimé avec succes .']);
@@ -71,7 +71,7 @@ class ContactclientController extends Controller
     }
 
     public function getcontact(Request $request){
-        $contact=Contactclient::find($request->id);
+        $contact=Contact::find($request->id);
         return response()->json(['contact'=>$contact]);
     }
 }

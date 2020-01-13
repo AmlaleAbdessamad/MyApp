@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 <?php 
-use \App\Http\Controllers\AdresseclientController;
-$pays=AdresseclientController::getPays();
+use \App\Http\Controllers\AdressesController;
+$pays=AdressesController::getPays();
 ?>
 @section('content')
 <div class="mt-4 clearfix">
@@ -172,7 +172,8 @@ $pays=AdresseclientController::getPays();
                 <div class="modal-body">
                     <form method="POST" id="form_contact" action="">
                         @csrf
-                        <input type="hidden" name="fournisseur_id" value="{{ $fournisseur->id }}">
+                        <input type="hidden" name="contactable_id" value="{{ $fournisseur->id }}">
+                        <input type="hidden" name="contactable_type" value="App\Fournisseur">
                         <input type="hidden" name="contact_id" value="">
                         
                         <div class="form-row">
@@ -274,7 +275,8 @@ $pays=AdresseclientController::getPays();
                 <div class="modal-body">
                     <form method="POST" id="form_adresse" action="">
                         @csrf
-                        <input type="hidden" name="fournisseur_id" value="{{ $fournisseur->id }}">
+                        <input type="hidden" name="adresseable_id" value="{{ $fournisseur->id }}">
+                        <input type="hidden" name="adresseable_type" value="App\Fournisseur">
                         <input type="hidden" name="adresse_id" value="">
                         
                         <div class="form-row">
