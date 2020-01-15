@@ -301,7 +301,7 @@ $pays=AdressesController::getPays();
             $.ajax({
                 method : "POST",
                 data : formData,
-                url : "{{ route('clients.contacts.add') }}",             
+                url : "{{ route('contacts.add') }}",             
                 dataType : "json",
                 cache : false,
                 processData : false,  // tell jQuery not to process the data
@@ -346,7 +346,7 @@ $pays=AdressesController::getPays();
             $('#modal_contact .modal-title').text("Modifier un Contact");
             $('#modal_contact #button_submit').text("Modifier").addClass('update').removeClass('add');
             tr=$(this).parent().parent();
-            $.post("{{ route('clients.contacts.get') }}",{id : id}, function(response){
+            $.post("{{ route('contacts.get') }}",{id : id}, function(response){
                 if(response){
                     $('#form_contact input[name="contact_id"]').val(id);
                     $('#form_contact select[name="civilite"]').val(response.contact.civilite);
@@ -368,7 +368,7 @@ $pays=AdressesController::getPays();
             $.ajax({
                 method : "POST",
                 data : formData,
-                url : "{{ route('clients.contacts.update') }}",           
+                url : "{{ route('contacts.update') }}",           
                 dataType : "json",
                 cache : false,
                 processData : false,
@@ -406,7 +406,7 @@ $pays=AdressesController::getPays();
             if(confirm("voulez-vous vraiment supprimer ce élément ?")){
                 $.ajax({
                     method : "GET",
-                    url : "{{ route('clients.show') }}/contacts/delete/"+id,           
+                    url : "{{ route('contacts') }}/delete/"+id,           
                     dataType : "json",
                     cache : false,
                     processData : false,
@@ -444,7 +444,7 @@ $pays=AdressesController::getPays();
             $.ajax({
                 method : "POST",
                 data : formData,
-                url : "{{ route('clients.adresses.add') }}",             
+                url : "{{ route('adresses.add') }}",             
                 dataType : "json",
                 cache : false,
                 processData : false,  // tell jQuery not to process the data
@@ -490,7 +490,7 @@ $pays=AdressesController::getPays();
             $('#modal_adresse .modal-title').text("Modifier une Adresse");
             $('#modal_adresse #button_submit').text("Modifier").addClass('update').removeClass('add');
             tr=$(this).parent().parent();
-            $.post("{{ route('clients.adresses.get') }}",{id : id}, function(response){
+            $.post("{{ route('adresses.get') }}",{id : id}, function(response){
                 if(response){
                     $('#form_adresse input[name="adresse_id"]').val(id);
                     $('#form_adresse input[name="nom"]').val(response.adresse.nom);
@@ -511,7 +511,7 @@ $pays=AdressesController::getPays();
             $.ajax({
                 method : "POST",
                 data : formData,
-                url : "{{ route('clients.adresses.update') }}",           
+                url : "{{ route('adresses.update') }}",           
                 dataType : "json",
                 cache : false,
                 processData : false,
@@ -549,7 +549,7 @@ $pays=AdressesController::getPays();
             if(confirm("voulez-vous vraiment supprimer ce élément ?")){
                 $.ajax({
                     method : "GET",
-                    url : "{{ route('clients.show') }}/adresses/delete/"+id,           
+                    url : "{{ route('adresses') }}/delete/"+id,           
                     dataType : "json",
                     cache : false,
                     processData : false,

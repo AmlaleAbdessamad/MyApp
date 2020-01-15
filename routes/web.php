@@ -11,6 +11,7 @@
 |
 */
 
+
 Auth::routes();
 
 Route::get('/', function () {
@@ -22,49 +23,48 @@ Route::get('/logout', function () {
     return redirect('/home');
 });
 
-
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/produits', 'ProductController@show')->name('produits.show');
-Route::get('/produits/add', 'ProductController@add')->name('produits.add');
-Route::post('/produits', 'ProductController@insert')->name('produits.insert');
-Route::get('/produits/edite/{produit}', 'ProductController@edite')->name('produits.edit');
-Route::get('/produits/delete/{produit}', 'ProductController@delete')->name('produits.delete');
-Route::post('/produits/{produit}', 'ProductController@update')->name('produits.update');
+Route::prefix('produits')->group(function () {
+    Route::get('/', 'ProductController@show')->name('produits.show');
+    Route::get('/add', 'ProductController@add')->name('produits.add');
+    Route::post('/', 'ProductController@insert')->name('produits.insert');
+    Route::get('/edite/{produit}', 'ProductController@edite')->name('produits.edit');
+    Route::get('/delete/{produit}', 'ProductController@delete')->name('produits.delete');
+    Route::post('/{produit}', 'ProductController@update')->name('produits.update');
+});
 
-Route::get('/clients', 'ClientController@show')->name('clients.show');
-Route::get('/clients/add', 'ClientController@add')->name('clients.add');
-Route::post('/clients', 'ClientController@insert')->name('clients.insert');
-Route::get('/clients/edite/{client}', 'ClientController@edite')->name('clients.edit');
-Route::get('/clients/delete/{client}', 'ClientController@delete')->name('clients.delete');
-Route::post('/clients/{client}', 'ClientController@update')->name('clients.update');
+Route::prefix('clients')->group(function () {
+    Route::get('/', 'ClientController@show')->name('clients.show');
+    Route::get('/add', 'ClientController@add')->name('clients.add');
+    Route::post('/', 'ClientController@insert')->name('clients.insert');
+    Route::get('/edite/{client}', 'ClientController@edite')->name('clients.edit');
+    Route::get('/delete/{client}', 'ClientController@delete')->name('clients.delete');
+    Route::post('/{client}', 'ClientController@update')->name('clients.update');
+});
+Route::prefix('contacts')->group(function (){
+    Route::post('/')->name('contacts');
+    Route::post('/add', 'ContactsController@addcontact')->name('contacts.add');
+    Route::post('/update', 'ContactsController@updatecontact')->name('contacts.update');
+    Route::get('/delete/{id}', 'ContactsController@deletecontact')->name('contacts.delete');
+    Route::post('/get', 'ContactsController@getcontact')->name('contacts.get');
+});
+Route::prefix('adresses')->group(function () {
+    Route::post('/')->name('adresses');
+    Route::post('/add', 'AdressesController@addadresse')->name('adresses.add');
+    Route::post('/update', 'AdressesController@updateadresse')->name('adresses.update');
+    Route::get('/delete/{id}', 'AdressesController@deleteadresse')->name('adresses.delete');
+    Route::post('/get', 'AdressesController@getadresse')->name('adresses.get');
+});
+//fournisseurs
+Route::prefix('fournisseurs')->group(function () {
+    Route::get('/', 'FournisseurController@show')->name('fournisseurs.show');
+    Route::get('/add', 'FournisseurController@add')->name('fournisseurs.add');
+    Route::post('/', 'FournisseurController@insert')->name('fournisseurs.insert');
+    Route::get('/edite/{fournisseur}', 'FournisseurController@edite')->name('fournisseurs.edit');
+    Route::get('/delete/{fournisseur}', 'FournisseurController@delete')->name('fournisseurs.delete');
+    Route::post('/{fournisseur}', 'FournisseurController@update')->name('fournisseurs.update');
+});
 
-Route::post('/clients/contacts/add', 'ContactsController@addcontact')->name('clients.contacts.add');
-Route::post('/clients/contacts/update', 'ContactsController@updatecontact')->name('clients.contacts.update');
-Route::get('/clients/contacts/delete/{id}', 'ContactsController@deletecontact')->name('clients.contacts.delete');
-Route::post('/clients/contacts/get', 'ContactsController@getcontact')->name('clients.contacts.get');
-
-Route::post('/clients/adresses/add', 'AdressesController@addadresse')->name('clients.adresses.add');
-Route::post('/clients/adresses/update', 'AdressesController@updateadresse')->name('clients.adresses.update');
-Route::get('/clients/adresses/delete/{id}', 'AdressesController@deleteadresse')->name('clients.adresses.delete');
-Route::post('/clients/adresses/get', 'AdressesController@getadresse')->name('clients.adresses.get');
-
-
-//fournisseurs 
-Route::get('/fournisseurs', 'FournisseurController@show')->name('fournisseurs.show');
-Route::get('/fournisseurs/add', 'FournisseurController@add')->name('fournisseurs.add');
-Route::post('/fournisseurs', 'FournisseurController@insert')->name('fournisseurs.insert');
-Route::get('/fournisseurs/edite/{fournisseur}', 'FournisseurController@edite')->name('fournisseurs.edit');
-Route::get('/fournisseurs/delete/{fournisseur}', 'FournisseurController@delete')->name('fournisseurs.delete');
-Route::post('/fournisseurs/{fournisseur}', 'FournisseurController@update')->name('fournisseurs.update');
-
-Route::post('/fournisseurs/contacts/add', 'ContactsController@addcontact')->name('fournisseurs.contacts.add');
-Route::post('/fournisseurs/contacts/update', 'ContactsController@updatecontact')->name('fournisseurs.contacts.update');
-Route::get('/fournisseurs/contacts/delete/{id}', 'ContactsController@deletecontact')->name('fournisseurs.contacts.delete');
-Route::post('/fournisseurs/contacts/get', 'ContactsController@getcontact')->name('fournisseurs.contacts.get');
-
-Route::post('/fournisseurs/adresses/add', 'AdressesController@addadresse')->name('fournisseurs.adresses.add');
-Route::post('/fournisseurs/adresses/update', 'AdressesController@updateadresse')->name('fournisseurs.adresses.update');
-Route::get('/fournisseurs/adresses/delete/{id}', 'AdressesController@deleteadresse')->name('fournisseurs.adresses.delete');
-Route::post('/fournisseurs/adresses/get', 'AdressesController@getadresse')->name('fournisseurs.adresses.get');
+//factures
+Route::get('/factures', 'FactureController@index')->name('factures.show');
